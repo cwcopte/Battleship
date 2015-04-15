@@ -109,14 +109,14 @@ false if it does not.
 				hitCount++;
 				if(this.getShipArray()[row][column].shootAt(row, column)){
 					//hit but not sunk
-					
+
 					return true;
 				}else{
 					//hit but sunk
 					return false;
 				}
-				
-				
+
+
 			}
 		}
 		return false;
@@ -171,9 +171,32 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 	 */
 	void print(){
 		//print array
+		Ship currentShip;
 		for (int i = 0; i < ships.length; i++) {
 			for (int j = 0; j < ships[i].length; j++) {
-				switch 
+				currentShip=ships[i][j];
+				if (currentShip.getClass()==Ship.class){
+					if(currentShip.isSunk()){
+						System.out.print("x");
+					}else if(currentShip.shootAt(i, j)){
+						System.out.print("s");
+					}
+				}
+				else if(currentShip.getClass()==EmptySea.class)
+				{
+					//where to record what position has been hited?
+					//only the hit array?
+					//but no getter
+					//not private
+					if(currentShip.shootAt(i, j)){
+						System.out.print("-");
+					}else{
+						System.out.print(".");
+					}
+					
+				}
+
+
 				System.out.print(ships[i][j] + " ");
 				//if i, j out of array length? could it be processed?
 				//raise runtime error?
