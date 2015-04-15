@@ -1,11 +1,11 @@
 package battleship;
 
 public abstract class Ship {
-	int bowRow;
-	int bowColumn;
-	int length;
-	boolean horizontal;
-	boolean []hit=new boolean[4];
+	protected int bowRow;
+	protected int bowColumn;
+	protected int length;
+	protected boolean horizontal;
+	protected boolean []hit=new boolean[4];
 	/**
 	 * 
 	 * @return

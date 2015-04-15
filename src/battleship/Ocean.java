@@ -34,6 +34,17 @@ public class Ocean {
 		placeShips(destroyer,this);
 		placeShips(cruiser,this);
 		placeShips(submarine,this);
+		//place empty ships
+		Random row=new Random();
+		Random column=new Random();
+		EmptySea empty=new EmptySea();
+		for (int i = 0; i < ships.length; i++) {
+			for (int j = 0; j < ships[i].length; j++) {
+				if (ships[i][j]!= null){
+					ships[i][j]=empty;
+				}
+			}
+		}
 	}
 
 	private void placeShips(Ship[] insertShips, Ocean ocean){
@@ -195,8 +206,6 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 					}
 					
 				}
-
-
 				System.out.print(ships[i][j] + " ");
 				//if i, j out of array length? could it be processed?
 				//raise runtime error?
