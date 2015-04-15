@@ -61,34 +61,32 @@ the given orientation, and returns false otherwise.
 		//0-9
 
 		if(horizontal){
-			if(row>=0&&(row+this.getLength())<=9&&column>=0&&column<=9){
-				for( int i=column-1;i<column+this.getLength()+1;i++){
-					for( int j=row-1;j<row+2;j++){
-						//check sourounding and the ship position
-						if(ocean.isOccupied(j, i))
+			if(row>=0&&(row+this.getLength()-1)<=9&&column>=0&&column<=9){
+				
+				for( int i=column;i<column+this.getLength();i++){
+					
+						//check ship position and ignore empty ship in sourounding
+						if(ocean.isOccupied(row, i))
 						{
 							return false;
 						}
-					}
 				}
 				return true;
-			}
+			}return false;
 		}
 		else{
-			if(column>=0&&(column+this.getLength())<=9&&row>=0&&row<=9){
+			if(column>=0&&(column+this.getLength()-1)<=9&&row>=0&&row<=9){
 				for( int i=row-1;i<row+this.getLength()+1;i++){
-					for( int j=column-1;j<column+2;j++){
-						//check sourounding and the ship position
-						if(ocean.isOccupied(i, j))
+				
+						//check ship position and ignore empty ship in sourounding
+						if(ocean.isOccupied(i, column))
 						{
 							return false;
 						}
-					}
+					
 				}return true;
 			}
 		}return false;
-
-
 
 	}
 
@@ -165,8 +163,18 @@ true, otherwise return false
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+
+		if(this.isSunk()){
+			return "x";
+		}
+		else{
+			for(int i=0;i<hit.length;i++){
+				if (hit[i]){
+					return "s";
+				}
+			}return "";
+			//for not sunk or hitted
+		}
 	}
 
 }

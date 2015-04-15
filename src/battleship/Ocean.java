@@ -35,11 +35,12 @@ public class Ocean {
 		placeShips(cruiser,this);
 		placeShips(submarine,this);
 	}
-	
+
 	private void placeShips(Ship[] insertShips, Ocean ocean){
 		Random row=new Random();
 		Random column=new Random();
 		Random horizontal=new Random();
+		EmptySea sea=new EmptySea();
 		/*
 		 * while, do; do while ? both
 		 */
@@ -54,14 +55,29 @@ public class Ocean {
 				randomHorizontal=horizontal.nextBoolean();
 
 				if(insertShips[i].okToPlaceShipAt(randomRow,randomColumn,randomHorizontal, ocean)){
+					//place ship
 					insertShips[i].placeShipAt(randomRow,randomColumn,randomHorizontal, ocean);
+					//change surrounding, overwrite
+					if(randomHorizontal){
+						for(int m=randomRow-1;m<randomRow+2;m++){
+							for(int n=randomColumn;n<randomColumn+insertShips[i].length;n++){
+								if(n>=0&&n<=9&&m>=0&&m<=9&&!ocean.isOccupied(m, n)){
+									//for valid input and no ship exist
+									sea.placeShipAt(randomRow, randomColumn, randomHorizontal, ocean);
+								}
+
+							}
+
+						}
+					}
+
 				}
 			}
 			while(!(insertShips[i].okToPlaceShipAt(randomRow,randomColumn,randomHorizontal, ocean)));
 		}
 	}
-	
-	
+
+
 	/**
 	 * Returns true if the given location contains a ship, false if it does not.
 	 * @param row
@@ -84,17 +100,25 @@ false if it does not.
 	 * @return
 	 */
 	boolean shootAt(int row, int column){
+		//updates the number of shots that have been fired
+		shotsFired++;
+
 		if(!(this.getShipArray()[row][column] instanceof EmptySea)){
 			if(!this.getShipArray()[row][column].isSunk()){
-				return true;
+				//update the number of hits
+				hitCount++;
+				if(this.getShipArray()[row][column].shootAt(row, column)){
+					//hit but not sunk
+					
+					return true;
+				}else{
+					//hit but sunk
+					return false;
+				}
+				
+				
 			}
-			//when to increase?
-			/*
-			else{
-				shipsSunk++;
-			}*/
 		}
-		//real ship but not afloat? false instead?
 		return false;
 	}
 	/**
@@ -136,16 +160,26 @@ false if it does not.
 		return ships;
 	}
 	/**
-	 * 
+	 * Prints the ocean. To aid the user, row numbers should be displayed along the left edge
+of the array, and column numbers should be displayed along the top. Numbers should
+be 0 to 9, not 1 to 10.
+The top left corner square should be 0, 0.
+Use ’S’ to indicate a location that you have fired upon and hit a (real) ship,
+’-’ to indicate a location that you have fired upon and found nothing there,
+’x’ to indicate a location containing a sunken ship,
+and ’.’ (a period) to indicate a location that you have never fired upon.
 	 */
 	void print(){
 		//print array
-        for (int i = 0; i < ships.length; i++) {
-            for (int j = 0; j < ships[i].length; j++) {
-                System.out.print(ships[i][j] + " ");
-            }
-            System.out.println();
-        }
+		for (int i = 0; i < ships.length; i++) {
+			for (int j = 0; j < ships[i].length; j++) {
+				switch 
+				System.out.print(ships[i][j] + " ");
+				//if i, j out of array length? could it be processed?
+				//raise runtime error?
+			}
+			System.out.println();
+		}
 
 	}
 }
