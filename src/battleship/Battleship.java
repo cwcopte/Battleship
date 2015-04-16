@@ -5,6 +5,8 @@ public class Battleship extends Ship {
 	public Battleship() {
 		// TODO Auto-generated constructor stub
 		length=4;
+		//hit=new boolean[]{false,false,false,false};
+		hit=new boolean[]{false,false,false,false};
 	}
 	@Override
 	String getShipType() {

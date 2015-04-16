@@ -5,6 +5,8 @@ public class Cruiser extends Ship {
 	public Cruiser() {
 		length=3;
 		// TODO Auto-generated constructor stub
+		//hit=new boolean[]{false,false,false,false};
+		hit=new boolean[]{false,false,false};
 	}
 	@Override
 	String getShipType() {

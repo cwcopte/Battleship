@@ -5,6 +5,8 @@ public class EmptySea  extends Ship{
 	public EmptySea() {
 	
 		length=1;
+		//hit=new boolean[]{false,false,false,false};
+		hit=new boolean[]{false};
 	}
 
 	@Override

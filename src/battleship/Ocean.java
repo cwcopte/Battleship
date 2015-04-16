@@ -24,11 +24,14 @@ public class Ocean {
 	 */
 	void placeAllShipsRandomly(){
 
-
-		Battleship[] battleship=new Battleship[1];
-		Destroyer[] destroyer=new Destroyer[3];//length2
-		Cruiser[] cruiser=new Cruiser[4];
-		Submarine[] submarine=new Submarine[2];//length3
+		//Battleship singleBattleship=new Battleship();
+		//Destroyer singleDestoryer=new Destroyer();
+		//singleBattleship
+		//Battleship[] battleship=new Battleship[]{singleBattleship};
+		Battleship[] battleship=new Battleship[]{new Battleship()};//ship length 4
+		Destroyer[] destroyer=new Destroyer[]{new Destroyer(),new Destroyer(),new Destroyer()};//ship length2
+		Cruiser[] cruiser=new Cruiser[]{new Cruiser(),new Cruiser(),new Cruiser(),new Cruiser()};//ship length 1
+		Submarine[] submarine=new Submarine[]{new Submarine(),new Submarine()};//ship length3
 		//EmptySea[]
 		placeShips(battleship,this);
 		placeShips(destroyer,this);
@@ -96,10 +99,13 @@ public class Ocean {
 	 * @return
 	 */
 	boolean isOccupied(int row, int column){
-		//row and column out of range?
-		if(this.getShipArray()[row][column] instanceof EmptySea){
-			return true;
+		//check if row and column out of range
+		if(row>=0&&row<=9&&column>=0&&column<=9){
+			if(this.getShipArray()[row][column] instanceof EmptySea){
+				return true;
+			}
 		}
+
 		return false;
 
 	}
@@ -115,20 +121,18 @@ false if it does not.
 		shotsFired++;
 
 		if(!(this.getShipArray()[row][column] instanceof EmptySea)){
-			if(!this.getShipArray()[row][column].isSunk()){
-				//update the number of hits
+			//	if(!this.getShipArray()[row][column].isSunk()){//could be eliminate as instruction says
+			//update the number of hits
+
+			if(this.getShipArray()[row][column].shootAt(row, column)){
+				//hit but not sunk
 				hitCount++;
-				if(this.getShipArray()[row][column].shootAt(row, column)){
-					//hit but not sunk
-
-					return true;
-				}else{
-					//hit but sunk
-					return false;
-				}
-
-
+				return true;
+			}else{
+				//hit but sunk
+				return false;
 			}
+			//}
 		}
 		return false;
 	}
@@ -186,14 +190,17 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 		for (int i = 0; i < ships.length; i++) {
 			for (int j = 0; j < ships[i].length; j++) {
 				currentShip=ships[i][j];
-				if (currentShip.getClass()==Ship.class){
+				if (currentShip instanceof Ship){
+					//if (currentShip.getClass()==Ship.class){
 					if(currentShip.isSunk()){
 						System.out.print("x");
 					}else if(currentShip.shootAt(i, j)){
 						System.out.print("s");
 					}
 				}
-				else if(currentShip.getClass()==EmptySea.class)
+				else if(currentShip instanceof EmptySea)
+
+					//else if(currentShip.getClass()==EmptySea.class)
 				{
 					//where to record what position has been hited?
 					//only the hit array?
@@ -204,7 +211,7 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 					}else{
 						System.out.print(".");
 					}
-					
+
 				}
 				System.out.print(ships[i][j] + " ");
 				//if i, j out of array length? could it be processed?

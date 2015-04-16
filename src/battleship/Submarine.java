@@ -5,6 +5,8 @@ public class Submarine extends Ship{
 	public Submarine() {
 		// TODO Auto-generated constructor stub
 		length=1;
+		//hit=new boolean[]{false,false,false,false};
+		hit=new boolean[]{false };
 	}
 	@Override
 	String getShipType() {

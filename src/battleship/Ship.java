@@ -5,7 +5,7 @@ public abstract class Ship {
 	protected int bowColumn;
 	protected int length;
 	protected boolean horizontal;
-	protected boolean []hit=new boolean[4];
+	boolean []hit;
 	/**
 	 * 
 	 * @return
@@ -41,11 +41,13 @@ public abstract class Ship {
 	}
 	//int abstract getLength();
 	public Ship() {
-		// TODO Auto-generated constructor stub
-		boolean []hit=new boolean[4];
+		
+		//hit=new boolean[]{false,false,false,false};
+		/*
 		for(int i=0;i<hit.length;i++){
 			hit[i]=false;
 		}
+		*/
 	}
 	abstract String getShipType();
 	/**
@@ -61,29 +63,29 @@ the given orientation, and returns false otherwise.
 		//0-9
 
 		if(horizontal){
-			if(row>=0&&(row+this.getLength()-1)<=9&&column>=0&&column<=9){
-				
+			if(column>=0&&(column+this.getLength()-1)<=9&&row>=0&&row<=9){
+
 				for( int i=column;i<column+this.getLength();i++){
-					
-						//check ship position and ignore empty ship in sourounding
-						if(ocean.isOccupied(row, i))
-						{
-							return false;
-						}
+
+					//check ship position and ignore empty ship in sourounding
+					if(ocean.isOccupied(row, i))
+					{
+						return false;
+					}
 				}
 				return true;
 			}return false;
 		}
 		else{
-			if(column>=0&&(column+this.getLength()-1)<=9&&row>=0&&row<=9){
+			if(row>=0&&(row+this.getLength()-1)<=9&&column>=0&&column<=9){
 				for( int i=row-1;i<row+this.getLength()+1;i++){
-				
-						//check ship position and ignore empty ship in sourounding
-						if(ocean.isOccupied(i, column))
-						{
-							return false;
-						}
-					
+
+					//check ship position and ignore empty ship in sourounding
+					if(ocean.isOccupied(i, column))
+					{
+						return false;
+					}
+
 				}return true;
 			}
 		}return false;
@@ -127,21 +129,31 @@ true, otherwise return false
 	 * @return
 	 */
 	boolean shootAt(int row, int column){
-		this.getBowRow();
-		if(this.isHorizontal()){
-			//how to get the variable
+		//how about invalid input? in testing , or control in main(later)
+		//this.getBowRow();
+		int position;
 
-			if(column>this.bowColumn&&column<(this.bowColumn+this.length)&&this.bowRow==row){
-				hit[column-this.bowColumn]=true;
+		if(!this.isSunk()){
+			if(this.isHorizontal()){
+				//how to get the variable
+
+				if(column>=this.bowColumn&&column<(this.bowColumn+this.length)&&this.bowRow==row){
+					position=column-this.bowColumn;
+					this.hit[position]=true;
+					//System.out.println("changed: "+hit[position]);
+					return true;
+
+				}
+
+				//if(column>this.getBowColumn();&&column<(this.getBowColumn()+this.getLength()))
+			}else{
+				if(row>=this.bowRow&&row<(this.bowRow+this.length)&&this.bowColumn==column){
+					position=row-this.bowRow;
+					this.hit[position]=true;
+					//System.out.println("changed: "+hit[position]);
+				}
 				return true;}
-
-			//if(column>this.getBowColumn();&&column<(this.getBowColumn()+this.getLength()))
-		}else{
-			if(row>this.bowRow&&row<(this.bowRow+this.length)&&this.bowColumn==column){
-				hit[row-this.bowRow]=true;
-			}
-			return true;}
-
+		}
 		return false;
 	}
 	/**
@@ -150,8 +162,8 @@ true, otherwise return false
 	 */
 	boolean isSunk(){
 		int m=0;
-		for(int i=0;i<hit.length;i++){
-			if(hit[i]){
+		for(int i=0;i<this.hit.length;i++){
+			if(this.hit[i]){
 				m++;
 			}
 			if(m==this.length){
@@ -172,7 +184,7 @@ true, otherwise return false
 				if (hit[i]){
 					return "s";
 				}
-			}return "";
+			}return " ";
 			//for not sunk or hitted
 		}
 	}

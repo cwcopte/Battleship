@@ -5,6 +5,8 @@ public class Destroyer extends Ship{
 	public Destroyer() {
 		// TODO Auto-generated constructor stub
 		length=2;
+		//hit=new boolean[]{false,false,false,false};
+		hit=new boolean[]{false,false};
 	}
 
 	@Override
