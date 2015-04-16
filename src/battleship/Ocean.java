@@ -127,6 +127,8 @@ false if it does not.
 			if(this.getShipArray()[row][column].shootAt(row, column)){
 				//hit but not sunk
 				hitCount++;
+				//if put here, cannot tell if hit but already sunk!
+				//then, do not need to follow the instructions?
 				return true;
 			}else{
 				//hit but sunk

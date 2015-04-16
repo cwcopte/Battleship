@@ -9,7 +9,7 @@ public class ShipTest {
 	private Ocean ocean;
 
 	private Ocean ocean2;
-	private Ocean ocean3;
+	private Ocean ocean1;
 
 	Battleship testBattleship;//ship length 4
 	Cruiser testCruiser;//ship length 3
@@ -33,7 +33,7 @@ public class ShipTest {
 		ocean=new Ocean();
 		ocean=new Ocean();
 		ocean2=new Ocean();
-		ocean3=new Ocean();
+		ocean1=new Ocean();
 
 		testBattleship=new Battleship();
 		//for mainly testing use
@@ -42,7 +42,7 @@ public class ShipTest {
 		testSubmarine=new Submarine();
 		testEmptySea=new EmptySea();
 
-		//ocean3, testing for horizontal
+		//ocean1, testing for horizontal
 		Battleship1=new Battleship();
 		Destroyer1=new Destroyer();
 		Cruiser1=new Cruiser();
@@ -60,47 +60,47 @@ public class ShipTest {
 				if(i==0){
 					if(j==0){
 
-						Destroyer1.placeShipAt(i, j, false, ocean3);
+						Destroyer1.placeShipAt(i, j, false, ocean1);
 					}
 					else if(j==2){
 
-						Cruiser1.placeShipAt(i, j, false, ocean3);
+						Cruiser1.placeShipAt(i, j, false, ocean1);
 
 					}else if(j==5){
 
-						Battleship1.placeShipAt(i, j, false, ocean3);
+						Battleship1.placeShipAt(i, j, false, ocean1);
 
 					}else if(j==9){
 
-						Submarine1.placeShipAt(i, j, false, ocean3);
+						Submarine1.placeShipAt(i, j, false, ocean1);
 
 
 					}	
 				}else if(i==8){
 					if(j==0){
-						EmptySea1.placeShipAt(i, j, false, ocean3);
+						EmptySea1.placeShipAt(i, j, false, ocean1);
 					}else if(j==9){
-						EmptySea2.placeShipAt(i, j, false, ocean3);
+						EmptySea2.placeShipAt(i, j, false, ocean1);
 					}
 
 				}
 				else if(i==9){
 					if(j==0){
 
-						Destroyer2.placeShipAt(i, j, true, ocean3);
+						Destroyer2.placeShipAt(i, j, true, ocean1);
 
 					}
 					else if(j==2){
 
-						Cruiser2.placeShipAt(i, j, true, ocean3);
+						Cruiser2.placeShipAt(i, j, true, ocean1);
 
 					}else if(j==5){
 
-						Battleship2.placeShipAt(i, j, true, ocean3);
+						Battleship2.placeShipAt(i, j, true, ocean1);
 
 					}else if(j==9){
 
-						Submarine2.placeShipAt(i, j, true, ocean3);
+						Submarine2.placeShipAt(i, j, true, ocean1);
 
 
 					}
