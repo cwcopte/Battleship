@@ -3,21 +3,29 @@ package battleship;
 import java.util.Random;
 
 public class Ocean {
-	Ship[][] ships = new Ship[10][10] ;
+	private Ship[][] ships = new Ship[10][10] ;
 	//Used to quickly determine which ship is in any given location.
-	int shotsFired ;
+	private int shotsFired ;
 	//The total number of shots fired by the user
-	int hitCount ;
+	private int hitCount ;
 	//The number of ships sunk (10 ships in all)
-	int shipsSunk;
+	private int shipsSunk;
 
 	public Ocean() {
-		//Creates an ”empty” ocean (fills the ships array with EmptySeas).
-		//ships[][]
+		EmptySea empty=new EmptySea();
+		//Creates an ”empty” ocean (fills the ships array with EmptySeas)
+		for (int i = 0; i < ships.length; i++) {
+			for (int j = 0; j < ships[i].length; j++) {
+			
+					ships[i][j]=empty;
+				
+			}
+		}
+		//then the method to place ship should change!!
 		shotsFired=0;
 		hitCount=0;
 		shipsSunk=0;
-		// TODO Auto-generated constructor stub
+
 	}
 	/**
 	 * Place all ten ships randomly on the (initially empty) ocean
@@ -37,17 +45,8 @@ public class Ocean {
 		placeShips(destroyer,this);
 		placeShips(cruiser,this);
 		placeShips(submarine,this);
-		//place empty ships
-		Random row=new Random();
-		Random column=new Random();
-		EmptySea empty=new EmptySea();
-		for (int i = 0; i < ships.length; i++) {
-			for (int j = 0; j < ships[i].length; j++) {
-				if (ships[i][j]!= null){
-					ships[i][j]=empty;
-				}
-			}
-		}
+		
+
 	}
 
 	private void placeShips(Ship[] insertShips, Ocean ocean){
@@ -101,11 +100,11 @@ public class Ocean {
 	boolean isOccupied(int row, int column){
 		//check if row and column out of range
 		if(row>=0&&row<=9&&column>=0&&column<=9){
-			if(this.getShipArray()[row][column] instanceof EmptySea){
+			if(!(this.getShipArray()[row][column] instanceof EmptySea)){
 				return true;
 			}
 		}
-
+		//invalid input?
 		return false;
 
 	}
@@ -119,22 +118,31 @@ false if it does not.
 	boolean shootAt(int row, int column){
 		//updates the number of shots that have been fired
 		shotsFired++;
-
 		if(!(this.getShipArray()[row][column] instanceof EmptySea)){
-			//	if(!this.getShipArray()[row][column].isSunk()){//could be eliminate as instruction says
-			//update the number of hits
-
 			if(this.getShipArray()[row][column].shootAt(row, column)){
 				//hit but not sunk
+				//System.out.println("success");
+
 				hitCount++;
 				//if put here, cannot tell if hit but already sunk!
 				//then, do not need to follow the instructions?
+				if (this.getShipArray()[row][column].isSunk()){
+					shipsSunk++;
+				}
 				return true;
-			}else{
-				//hit but sunk
-				return false;
 			}
-			//}
+			/*
+			 * 		//check how many ships have been sunk
+		for (int i = 0; i < ships.length; i++) {
+			for (int j = 0; j < ships[i].length; j++) {
+				if (!(ships[i][j] instanceof EmptySea)){
+					if (ships[i][j].isSunk()){
+						shipsSunk++;
+					}
+				}
+			}
+		}
+			 */
 		}
 		return false;
 	}
@@ -157,6 +165,7 @@ false if it does not.
 	 * @return
 	 */
 	public int getShipsSunk() {
+
 		return shipsSunk;
 	}
 	/**
@@ -192,30 +201,37 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 		for (int i = 0; i < ships.length; i++) {
 			for (int j = 0; j < ships[i].length; j++) {
 				currentShip=ships[i][j];
-				if (currentShip instanceof Ship){
-					//if (currentShip.getClass()==Ship.class){
-					if(currentShip.isSunk()){
-						System.out.print("x");
-					}else if(currentShip.shootAt(i, j)){
-						System.out.print("s");
-					}
-				}
-				else if(currentShip instanceof EmptySea)
-
-					//else if(currentShip.getClass()==EmptySea.class)
+				if(currentShip instanceof EmptySea)
 				{
-					//where to record what position has been hited?
-					//only the hit array?
-					//but no getter
-					//not private
-					if(currentShip.shootAt(i, j)){
+					if(currentShip.hit[0]){
+					//if(currentShip.shootAt(i, j)){
 						System.out.print("-");
 					}else{
 						System.out.print(".");
 					}
 
 				}
-				System.out.print(ships[i][j] + " ");
+				else {
+					//System.out.print("x");
+					System.out.print(currentShip.toString());
+					/*
+					if(currentShip.isSunk()){
+						System.out.print("x");
+					}else {
+						//check hit array
+						int hitNum=0;
+						for(int m=0;m<currentShip.hit.length;m++){
+							if (currentShip.hit[m]){
+								hitNum++;
+							}
+						}
+						if(hitNum>0){
+							System.out.print("s");
+						}
+						
+					}*/
+				}
+				//System.out.print(ships[i][j] + " ");
 				//if i, j out of array length? could it be processed?
 				//raise runtime error?
 			}

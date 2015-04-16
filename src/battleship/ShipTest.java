@@ -159,7 +159,8 @@ public class ShipTest {
 				assertFalse(testDestroyer.okToPlaceShipAt(i, j, true, ocean));
 			}
 		}
-
+//testing for nearby occupied!!
+		
 	}
 	@Test
 	public void placeShipAtTest() {
@@ -175,6 +176,7 @@ public class ShipTest {
 		for(int i=0;i<10;i++){
 			for(int j=0;j<10;j++){
 				if(j==0){
+					
 					assertFalse(ocean.getShipArray()[i][j] instanceof Destroyer);
 					testDestroyer.placeShipAt(i, j, true, ocean);
 					assertTrue(ocean.getShipArray()[i][j] instanceof Destroyer);
@@ -209,6 +211,7 @@ public class ShipTest {
 			for(int j=0;j<10;j++){
 				if(j<9){
 					if(i==0){
+						assertTrue(ocean2.getShipArray()[i][j] instanceof EmptySea);
 						assertFalse(ocean2.getShipArray()[i][j] instanceof Destroyer);
 						testDestroyer.placeShipAt(i, j, false, ocean2);
 						assertTrue(ocean2.getShipArray()[i][j] instanceof Destroyer);
@@ -216,6 +219,7 @@ public class ShipTest {
 						assertFalse(ocean2.getShipArray()[i+2][j] instanceof Destroyer);
 					}
 					else if(i==2){
+						assertTrue(ocean2.getShipArray()[i][j] instanceof EmptySea);
 						assertFalse(ocean2.getShipArray()[i][j] instanceof Cruiser);
 						testCruiser.placeShipAt(i, j, false, ocean2);
 						assertTrue(ocean2.getShipArray()[i][j] instanceof Cruiser);
@@ -223,6 +227,7 @@ public class ShipTest {
 						assertTrue(ocean2.getShipArray()[i+2][j] instanceof Cruiser);
 						assertFalse(ocean2.getShipArray()[i+3][j] instanceof Battleship);
 					}else if(i==5){
+						assertTrue(ocean2.getShipArray()[i][j] instanceof EmptySea);
 						assertFalse(ocean2.getShipArray()[i][j] instanceof Battleship);
 						testBattleship.placeShipAt(i, j, false, ocean2);
 						assertTrue(ocean2.getShipArray()[i][j] instanceof Battleship);
@@ -230,14 +235,12 @@ public class ShipTest {
 						assertTrue(ocean2.getShipArray()[i+2][j] instanceof Battleship);
 						assertTrue(ocean2.getShipArray()[i+3][j] instanceof Battleship);
 						assertFalse(ocean2.getShipArray()[i+4][j] instanceof Battleship);
-					}else if(i==9){
-						assertFalse(ocean2.getShipArray()[i][j] instanceof EmptySea);
-						testEmptySea.placeShipAt(i, j, false, ocean2);
-						assertTrue(ocean2.getShipArray()[i][j] instanceof EmptySea);
-
 					}
+					//problem exist!
+					
 				}
 				else{
+					assertTrue(ocean2.getShipArray()[i][j] instanceof EmptySea);
 					assertFalse(ocean2.getShipArray()[i][j] instanceof Submarine);
 					testSubmarine.placeShipAt(i, j, false, ocean2);
 					assertTrue(ocean2.getShipArray()[i][j] instanceof Submarine);
@@ -278,12 +281,18 @@ public class ShipTest {
 		assertFalse(Submarine1.shootAt(3, 0));
 
 		//always return false, no mater where
+		/*
 		assertFalse(EmptySea1.shootAt(8, 0));//ship length 1
 		assertFalse(EmptySea2.shootAt(8, 9));//ship length 1
 
 		assertFalse(EmptySea2.shootAt(8, 9));
 		assertFalse(EmptySea2.shootAt(6, 3));
+*/
+		assertTrue(EmptySea1.shootAt(8, 0));//ship length 1
+		assertTrue(EmptySea2.shootAt(8, 9));//ship length 1
 
+		assertTrue(EmptySea2.shootAt(8, 9));
+		assertTrue(EmptySea2.shootAt(6, 3));
 
 	}
 

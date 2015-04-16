@@ -14,13 +14,14 @@ public class EmptySea  extends Ship{
 	
 		return "empty";
 	}
-
+//return what and how to determined ever being hit or what?
+	/*
 	@Override
 	boolean shootAt(int row, int column) {
 
 		return false;
 	}
-
+*/
 	@Override
 	boolean isSunk() {
 

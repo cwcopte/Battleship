@@ -41,13 +41,13 @@ public abstract class Ship {
 	}
 	//int abstract getLength();
 	public Ship() {
-		
+
 		//hit=new boolean[]{false,false,false,false};
 		/*
 		for(int i=0;i<hit.length;i++){
 			hit[i]=false;
 		}
-		*/
+		 */
 	}
 	abstract String getShipType();
 	/**
@@ -64,31 +64,43 @@ the given orientation, and returns false otherwise.
 
 		if(horizontal){
 			if(column>=0&&(column+this.getLength()-1)<=9&&row>=0&&row<=9){
-
-				for( int i=column;i<column+this.getLength();i++){
-
-					//check ship position and ignore empty ship in sourounding
-					if(ocean.isOccupied(row, i))
-					{
-						return false;
+				//valid position, not out of edge
+				for( int i=row-1;i<row+2;i++){
+					for( int j=column-1;j<column+this.getLength()+1;j++){
+						//check ship position and surrounding ship
+						if(i>=0&&i<=9&&j>=0&&j<=9){
+							if(ocean.isOccupied(i, j))
+							{
+								return false;
+							}
+						}
 					}
 				}
+
 				return true;
-			}return false;
+			}
 		}
 		else{
 			if(row>=0&&(row+this.getLength()-1)<=9&&column>=0&&column<=9){
+				//check ship position and surrounding ship
 				for( int i=row-1;i<row+this.getLength()+1;i++){
+					for( int j=column-1;j<column+2;j++){
+						//check valid surrounding
+						if(i>=0&&i<=9&&j>=0&&j<=9){
+							if(ocean.isOccupied(i, j))
+							{
+								return false;
+							}
+						}
 
-					//check ship position and ignore empty ship in sourounding
-					if(ocean.isOccupied(i, column))
-					{
-						return false;
 					}
+				}
+				//valid position, not out of edge
 
-				}return true;
+				return true;
 			}
-		}return false;
+		}
+		return false;
 
 	}
 

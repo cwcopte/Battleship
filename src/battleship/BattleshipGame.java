@@ -17,7 +17,7 @@ final scores; and ask the user if he/she wants to play again.
 		BattleshipGame game=new BattleshipGame();
 
 		game.ocean.placeAllShipsRandomly();
-		
+		game.ocean.print();
 		//start of the game
 		String welcome = "Welcome to battleship game!";
 		System.out.println(welcome);
