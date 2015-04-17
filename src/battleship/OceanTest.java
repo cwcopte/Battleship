@@ -368,6 +368,6 @@ public class OceanTest {
 		assertEquals(" .", EmptySea2.toString());
 		EmptySea2.shootAt(8, 9);//ship length 1
 		assertEquals(" .", EmptySea2.toString());
-
+	}
 
 	}

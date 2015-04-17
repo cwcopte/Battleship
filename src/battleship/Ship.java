@@ -149,8 +149,8 @@ the given orientation, and returns false otherwise.
 	}
 	/**
 	 * )
-If a part of the ship occupies the given row and column, and the ship hasn’t been sunk,
-mark that part of the ship as ”hit” (in the hit array, 0 indicates the bow) and return
+If a part of the ship occupies the given row and column, and the ship hasn't been sunk,
+mark that part of the ship as (in the hit array, 0 indicates the bow) and return
 true, otherwise return false
 	 * @param row
 	 * @param column
@@ -227,4 +227,4 @@ true, otherwise return false
 			//for not sunk or hitted
 		}
 	}
-
+}
