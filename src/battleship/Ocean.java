@@ -258,7 +258,7 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 							}
 						}
 						if(!print){
-							System.out.print(" ");
+							System.out.print(".");
 						}
 						
 					}
