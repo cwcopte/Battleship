@@ -13,7 +13,7 @@ public class Ocean {
 
 	public Ocean() {
 
-		//Creates an ”empty” ocean (fills the ships array with EmptySeas)
+		//Creates an â€emptyâ€ ocean (fills the ships array with EmptySeas)
 		for (int i = 0; i < ships.length; i++) {
 			for (int j = 0; j < ships[i].length; j++) {
 				EmptySea empty=new EmptySea();
@@ -43,7 +43,11 @@ public class Ocean {
 
 
 	}
-
+    /**
+     * place object ship on the ocean if allowed
+     * @param insertShips
+     * @param ocean
+     */
 	private void placeShips(Ship[] insertShips, Ocean ocean){
 		Random row=new Random();
 		Random column=new Random();
@@ -74,9 +78,7 @@ public class Ocean {
 									//for valid input and no ship exist
 									sea.placeShipAt(randomRow, randomColumn, randomHorizontal, ocean);
 								}
-
 							}
-
 						}
 					}
 				 */
@@ -107,7 +109,7 @@ public class Ocean {
 
 	}
 	/**
-	 * Returns true if the given location contains a ”real” ship, still afloat, (not an EmptySea),
+	 * Returns true if the given location contains a â€realâ€ ship, still afloat, (not an EmptySea),
 false if it does not. 
 	 * @param row
 	 * @param column
@@ -169,7 +171,7 @@ false if it does not.
 		return false;
 	}
 	/**
-	 * 
+	 * return the current array of the ships
 	 * @return
 	 */
 	public Ship[][] getShipArray() {
@@ -180,10 +182,10 @@ false if it does not.
 of the array, and column numbers should be displayed along the top. Numbers should
 be 0 to 9, not 1 to 10.
 The top left corner square should be 0, 0.
-Use ’S’ to indicate a location that you have fired upon and hit a (real) ship,
-’-’ to indicate a location that you have fired upon and found nothing there,
-’x’ to indicate a location containing a sunken ship,
-and ’.’ (a period) to indicate a location that you have never fired upon.
+Use â€™Sâ€™ to indicate a location that you have fired upon and hit a (real) ship,
+â€™-â€™ to indicate a location that you have fired upon and found nothing there,
+â€™xâ€™ to indicate a location containing a sunken ship,
+and â€™.â€™ (a period) to indicate a location that you have never fired upon.
 	 */
 	void print(){
 		//print array
@@ -193,7 +195,7 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 		boolean horizontal;
 		int length;
 		//add number in front!
-		System.out.println("#0123456789");
+		System.out.println("# 0 1 2 3 4 5 6 7 8 9");
 		for (int i = 0; i < ships.length; i++) {
 			for (int j = 0; j < ships[i].length; j++) {
 				if(j==0){
@@ -208,17 +210,17 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 				{
 					if(currentShip.hit[0]){
 						//if(currentShip.shootAt(i, j)){
-						System.out.print("-");
+						System.out.print(" -");
 					}else{
-						System.out.print(".");
+						System.out.print(" .");
 					}
 
 				}
 				else if(currentShip instanceof Submarine){
 					if(currentShip.isSunk()){
-						System.out.print("x");
+						System.out.print(" x");
 					}else{
-						System.out.print(".");
+						System.out.print(" .");
 						//for testing
 						//System.out.print(" ");
 					}
@@ -229,8 +231,8 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 					//System.out.print(currentShip.toString());
 
 					if(currentShip.isSunk()){
-						System.out.print("x");
-					}else if(currentShip.toString()=="s") {
+						System.out.print(" x");
+					}else if(currentShip.toString()==" s") {
 						//check hit array
 						boolean print=false;
 						for(int m=0;m<currentShip.hit.length;m++){
@@ -238,7 +240,7 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 
 								if(horizontal){
 									if(j-column==m&&i==row){
-										System.out.print("s");
+										System.out.print(" s");
 										print=true;
 										
 									}/*
@@ -247,7 +249,7 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 									}*/
 								}else{
 									if(i-row==m&&j==column){
-										System.out.print("s");
+										System.out.print(" s");
 										print=true;
 									}
 									/*
@@ -258,12 +260,12 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 							}
 						}
 						if(!print){
-							System.out.print(".");
+							System.out.print(" .");
 						}
 						
 					}
 					else{
-						System.out.print(".");
+						System.out.print(" .");
 						//for testing!!
 						//System.out.print(" ");
 					}
