@@ -218,9 +218,9 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 					if(currentShip.isSunk()){
 						System.out.print("x");
 					}else{
-						//System.out.print(".");
+						System.out.print(".");
 						//for testing
-						System.out.print(" ");
+						//System.out.print(" ");
 					}
 				}
 				else {
@@ -263,9 +263,9 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 						
 					}
 					else{
-						//System.out.print(".");
+						System.out.print(".");
 						//for testing!!
-						System.out.print(" ");
+						//System.out.print(" ");
 					}
 				}
 			}
