@@ -9,7 +9,7 @@ public class BattleshipGame {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * accept ”shots” from the user; display the results; print
+	 * accept input from the user; display the results; print
 final scores; and ask the user if he/she wants to play again. 
 	 * @param args
 	 */
