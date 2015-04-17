@@ -1,14 +1,19 @@
 package battleship;
 
 public class EmptySea  extends Ship{
-	//Describes a part of the ocean that doesn’t have a ship in it.
+	//Describes a part of the ocean that doesnâ€™t have a ship in it.
+	/**
+	 * empty sea is instance of ship with length 1
+	 */
 	public EmptySea() {
 
 		length=1;
 		//hit=new boolean[]{false,false,false,false};
 		hit=new boolean[]{false};
 	}
-
+    /**
+     * type of empty sea is empty
+     */
 	@Override
 	String getShipType() {
 
@@ -18,13 +23,17 @@ public class EmptySea  extends Ship{
 
 
 
-
+    /**
+     * empty sea can't be sunk
+     */
 	@Override
 	boolean isSunk() {
 
 		return false;
 	}
-
+    /**
+     * empty sea cannot be hit
+     */
 	@Override
 	boolean shootAt(int row, int column) {
 
@@ -36,11 +45,13 @@ public class EmptySea  extends Ship{
 		return false;
 
 	}
-
+    /**
+     * marks the empty sea with a sign "."
+     */
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return ".";
+		return " .";
 	}
 
 }
