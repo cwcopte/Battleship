@@ -9,7 +9,7 @@ public class BattleshipGame {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * accept îshotsî from the user; display the results; print
+	 * accept ‚Äùshots‚Äù from the user; display the results; print
 final scores; and ask the user if he/she wants to play again. 
 	 * @param args
 	 */
@@ -34,7 +34,7 @@ final scores; and ask the user if he/she wants to play again.
 				quit=true;
 			}else if(typing.equals("r")){
 				//explain rules
-				System.out.println("Battleship is usually a two-player game, where each player has a fleet and an ocean(hidden from the other player), and tries to be the first to sink the other playerís fleet.");
+				System.out.println("Battleship is usually a two-player game, where each player has a fleet and an ocean(hidden from the other player), and tries to be the first to sink the other player‚Äôs fleet.");
 				typing=in.next();
 			}else if(typing.equals("s")){
 				
@@ -98,7 +98,10 @@ final scores; and ask the user if he/she wants to play again.
 			}
 		}
 	}
-
+    /**
+     * demonstrate how many shots have been fired, how many attacks are successful, and how many ships have s
+     * @return
+     */
 	//print final scores
 	public String getStatus(){
 		String result;
