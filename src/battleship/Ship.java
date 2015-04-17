@@ -7,35 +7,51 @@ public abstract class Ship {
 	protected boolean horizontal;
 	boolean []hit;
 	/**
-	 * 
+	 * returns the row (0 to 9) which contains the bow (front) of the ship.
 	 * @return
 	 */
 	public int getBowRow() {
 		return bowRow;
 	}
 	/**
-	 * 
+	 * set the row (0 to 9) which contains the bow (front) of the ship. 
 	 * @param bowRow
 	 */
 	public void setBowRow(int bowRow) {
 		this.bowRow = bowRow;
 	}
 	/**
-	 * 
+	 * return the column (0 to 9) which contains the bow (front) of the ship.
 	 * @return
 	 */
 	public int getBowColumn() {
 		return bowColumn;
 	}
+	/**
+	 * set the the column (0 to 9) which contains the bow (front) of the ship.
+	 * @param bowColumn
+	 */
 	public void setBowColumn(int bowColumn) {
 		this.bowColumn = bowColumn;
 	}
+	/**
+	 * return whether the ship is horizontal or not.
+	 * @return
+	 */
 	public boolean isHorizontal() {
 		return horizontal;
 	}
+	/**
+	 * set the horizontal position of the ship.
+	 * @param horizontal
+	 */
 	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
 	}
+	/**
+	 * returns the length of the ship
+	 * @return
+	 */
 	int getLength(){
 		return length;
 	}
@@ -133,8 +149,8 @@ the given orientation, and returns false otherwise.
 	}
 	/**
 	 * )
-If a part of the ship occupies the given row and column, and the ship hasnít been sunk,
-mark that part of the ship as îhitî (in the hit array, 0 indicates the bow) and return
+If a part of the ship occupies the given row and column, and the ship hasn‚Äôt been sunk,
+mark that part of the ship as ‚Äùhit‚Äù (in the hit array, 0 indicates the bow) and return
 true, otherwise return false
 	 * @param row
 	 * @param column
@@ -185,11 +201,14 @@ true, otherwise return false
 		}
 		return false;
 	}
+	/**
+	 * if the ship is sunk,mark it as "x", if the ship is hit but not sunk, mark it with "s", otherwise "." if not empty sea
+	 */
 	@Override
 	public String toString() {
 		int shot=0;
 		if(this.isSunk()){
-			return "x";
+			return " x";
 		}
 		else{
 			for(int i=0;i<hit.length;i++){
@@ -200,13 +219,12 @@ true, otherwise return false
 				
 			}
 			if(shot<this.length&&shot!=0){
-				return "s";
+				return " s";
 			}else{
-				return ".";
+				return " .";
 			}
 			
 			//for not sunk or hitted
 		}
 	}
 
-}
