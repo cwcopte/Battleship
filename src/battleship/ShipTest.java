@@ -162,6 +162,7 @@ public class ShipTest {
 //testing for nearby occupied!!
 		
 	}
+	
 	@Test
 	public void placeShipAtTest() {
 		for(int i=0;i<10;i++){
@@ -281,21 +282,16 @@ public class ShipTest {
 		assertFalse(Submarine1.shootAt(3, 0));
 
 		//always return false, no mater where
-		/*
+		
 		assertFalse(EmptySea1.shootAt(8, 0));//ship length 1
 		assertFalse(EmptySea2.shootAt(8, 9));//ship length 1
 
 		assertFalse(EmptySea2.shootAt(8, 9));
 		assertFalse(EmptySea2.shootAt(6, 3));
-*/
-		assertTrue(EmptySea1.shootAt(8, 0));//ship length 1
-		assertTrue(EmptySea2.shootAt(8, 9));//ship length 1
 
-		assertTrue(EmptySea2.shootAt(8, 9));
-		assertTrue(EmptySea2.shootAt(6, 3));
 
 	}
-
+	
 	@Test
 	public void isSunkTest() {
 		assertFalse(Battleship2.isSunk());
@@ -340,15 +336,15 @@ public class ShipTest {
 	//do we need this?
 	@Test
 	public void toStringTest() {
-
-		assertEquals(" ", Cruiser2.toString());
+		//System.out.println(Cruiser2.toString());
+		assertEquals(".", Cruiser2.toString());
 		Cruiser2.shootAt(9, 2);//ship length 3
 		Cruiser2.shootAt(9, 3);
 		assertEquals("s", Cruiser2.toString());
 		Cruiser2.shootAt(9, 4);
 		assertEquals("x", Cruiser2.toString());
 		
-		assertEquals(" ", Battleship2.toString());
+		assertEquals(".", Battleship2.toString());
 		Battleship2.shootAt(9, 5);//ship length 4
 		Battleship2.shootAt(9, 6);
 		Battleship2.shootAt(9, 7);
@@ -357,13 +353,13 @@ public class ShipTest {
 		assertEquals("x", Battleship2.toString());
 
 
-		assertEquals(" ", Destroyer2.toString());
+		assertEquals(".", Destroyer2.toString());
 		Destroyer2.shootAt(9, 0);//ship length 2
 		assertEquals("s", Destroyer2.toString());
 		Destroyer2.shootAt(9, 1);
 		assertEquals("x", Destroyer2.toString());
 		
-		assertEquals(" ", Submarine2.toString());
+		assertEquals(".", Submarine2.toString());
 		Submarine2.shootAt(9, 9);//ship length 1
 		assertEquals("x", Cruiser2.toString());
 
@@ -373,12 +369,6 @@ public class ShipTest {
 		EmptySea2.shootAt(8, 9);//ship length 1
 		assertEquals(".", EmptySea2.toString());
 
-		/*
-		
-		
-		
-		assertEquals(" ", testSubmarine.toString());
-		assertEquals(" ", testDestroyer.toString());
-*/
+
 	}
 }

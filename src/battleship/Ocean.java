@@ -12,13 +12,13 @@ public class Ocean {
 	private int shipsSunk;
 
 	public Ocean() {
-		EmptySea empty=new EmptySea();
+
 		//Creates an ”empty” ocean (fills the ships array with EmptySeas)
 		for (int i = 0; i < ships.length; i++) {
 			for (int j = 0; j < ships[i].length; j++) {
-			
-					ships[i][j]=empty;
-				
+				EmptySea empty=new EmptySea();
+				ships[i][j]=empty;
+
 			}
 		}
 		//then the method to place ship should change!!
@@ -31,21 +31,16 @@ public class Ocean {
 	 * Place all ten ships randomly on the (initially empty) ocean
 	 */
 	void placeAllShipsRandomly(){
-
-		//Battleship singleBattleship=new Battleship();
-		//Destroyer singleDestoryer=new Destroyer();
-		//singleBattleship
-		//Battleship[] battleship=new Battleship[]{singleBattleship};
 		Battleship[] battleship=new Battleship[]{new Battleship()};//ship length 4
 		Destroyer[] destroyer=new Destroyer[]{new Destroyer(),new Destroyer(),new Destroyer()};//ship length2
-		Cruiser[] cruiser=new Cruiser[]{new Cruiser(),new Cruiser(),new Cruiser(),new Cruiser()};//ship length 1
-		Submarine[] submarine=new Submarine[]{new Submarine(),new Submarine()};//ship length3
-		//EmptySea[]
+		Cruiser[] cruiser=new Cruiser[]{new Cruiser(),new Cruiser()};//ship length 3
+		Submarine[] submarine=new Submarine[]{new Submarine(),new Submarine(),new Submarine(),new Submarine()};//ship length1
+
 		placeShips(battleship,this);
 		placeShips(destroyer,this);
 		placeShips(cruiser,this);
 		placeShips(submarine,this);
-		
+
 
 	}
 
@@ -53,7 +48,7 @@ public class Ocean {
 		Random row=new Random();
 		Random column=new Random();
 		Random horizontal=new Random();
-		EmptySea sea=new EmptySea();
+
 		/*
 		 * while, do; do while ? both
 		 */
@@ -67,11 +62,12 @@ public class Ocean {
 				randomColumn=column.nextInt(10);
 				randomHorizontal=horizontal.nextBoolean();
 
-				if(insertShips[i].okToPlaceShipAt(randomRow,randomColumn,randomHorizontal, ocean)){
-					//place ship
-					insertShips[i].placeShipAt(randomRow,randomColumn,randomHorizontal, ocean);
-					//change surrounding, overwrite
-					if(randomHorizontal){
+				//if(insertShips[i].okToPlaceShipAt(randomRow,randomColumn,randomHorizontal, ocean)){
+				//place ship
+
+				//change surrounding, overwrite
+				/*
+				 * 					if(randomHorizontal){
 						for(int m=randomRow-1;m<randomRow+2;m++){
 							for(int n=randomColumn;n<randomColumn+insertShips[i].length;n++){
 								if(n>=0&&n<=9&&m>=0&&m<=9&&!ocean.isOccupied(m, n)){
@@ -83,10 +79,12 @@ public class Ocean {
 
 						}
 					}
+				 */
 
-				}
+				//	}
 			}
 			while(!(insertShips[i].okToPlaceShipAt(randomRow,randomColumn,randomHorizontal, ocean)));
+			insertShips[i].placeShipAt(randomRow,randomColumn,randomHorizontal, ocean);
 		}
 	}
 
@@ -118,31 +116,23 @@ false if it does not.
 	boolean shootAt(int row, int column){
 		//updates the number of shots that have been fired
 		shotsFired++;
-		if(!(this.getShipArray()[row][column] instanceof EmptySea)){
-			if(this.getShipArray()[row][column].shootAt(row, column)){
-				//hit but not sunk
-				//System.out.println("success");
+		//if(!(this.getShipArray()[row][column] instanceof EmptySea)){
+		if(!this.getShipArray()[row][column].isSunk()){
+			
+		
+		if(this.getShipArray()[row][column].shootAt(row, column)){
+			//hit but not sunk
+			//System.out.println("success");
 
-				hitCount++;
-				//if put here, cannot tell if hit but already sunk!
-				//then, do not need to follow the instructions?
-				if (this.getShipArray()[row][column].isSunk()){
-					shipsSunk++;
-				}
-				return true;
+			hitCount++;
+			//if put here, cannot tell if hit but already sunk!
+			//then, do not need to follow the instructions?
+			if (this.getShipArray()[row][column].isSunk()){
+				shipsSunk++;
 			}
-			/*
-			 * 		//check how many ships have been sunk
-		for (int i = 0; i < ships.length; i++) {
-			for (int j = 0; j < ships[i].length; j++) {
-				if (!(ships[i][j] instanceof EmptySea)){
-					if (ships[i][j].isSunk()){
-						shipsSunk++;
-					}
-				}
-			}
+			return true;
+
 		}
-			 */
 		}
 		return false;
 	}
@@ -198,45 +188,88 @@ and ’.’ (a period) to indicate a location that you have never fired upon.
 	void print(){
 		//print array
 		Ship currentShip;
+		int row;
+		int column;
+		boolean horizontal;
+		int length;
+		//add number in front!
+		System.out.println("#0123456789");
 		for (int i = 0; i < ships.length; i++) {
 			for (int j = 0; j < ships[i].length; j++) {
+				if(j==0){
+					System.out.print(i);
+				}
 				currentShip=ships[i][j];
+				column=currentShip.getBowColumn();
+				row=currentShip.getBowRow();
+				horizontal=currentShip.isHorizontal();
+				length=currentShip.getLength();
 				if(currentShip instanceof EmptySea)
 				{
 					if(currentShip.hit[0]){
-					//if(currentShip.shootAt(i, j)){
+						//if(currentShip.shootAt(i, j)){
 						System.out.print("-");
 					}else{
 						System.out.print(".");
 					}
 
 				}
-				else {
-					//System.out.print("x");
-					System.out.print(currentShip.toString());
-					/*
+				else if(currentShip instanceof Submarine){
 					if(currentShip.isSunk()){
 						System.out.print("x");
-					}else {
+					}else{
+						//System.out.print(".");
+						//for testing
+						System.out.print(" ");
+					}
+				}
+				else {
+					
+					//System.out.print("x");
+					//System.out.print(currentShip.toString());
+
+					if(currentShip.isSunk()){
+						System.out.print("x");
+					}else if(currentShip.toString()=="s") {
 						//check hit array
-						int hitNum=0;
+						boolean print=false;
 						for(int m=0;m<currentShip.hit.length;m++){
 							if (currentShip.hit[m]){
-								hitNum++;
+
+								if(horizontal){
+									if(j-column==m&&i==row){
+										System.out.print("s");
+										print=true;
+										
+									}/*
+									else{
+										System.out.print(" ");
+									}*/
+								}else{
+									if(i-row==m&&j==column){
+										System.out.print("s");
+										print=true;
+									}
+									/*
+									else{
+										System.out.print(" ");
+									}*/
+								}
 							}
 						}
-						if(hitNum>0){
-							System.out.print("s");
+						if(!print){
+							System.out.print(" ");
 						}
 						
-					}*/
+					}
+					else{
+						//System.out.print(".");
+						//for testing!!
+						System.out.print(" ");
+					}
 				}
-				//System.out.print(ships[i][j] + " ");
-				//if i, j out of array length? could it be processed?
-				//raise runtime error?
 			}
 			System.out.println();
 		}
-
 	}
 }

@@ -187,16 +187,24 @@ true, otherwise return false
 	}
 	@Override
 	public String toString() {
-
+		int shot=0;
 		if(this.isSunk()){
 			return "x";
 		}
 		else{
 			for(int i=0;i<hit.length;i++){
 				if (hit[i]){
-					return "s";
+					shot++;
+					//return "s";
 				}
-			}return " ";
+				
+			}
+			if(shot<this.length&&shot!=0){
+				return "s";
+			}else{
+				return ".";
+			}
+			
 			//for not sunk or hitted
 		}
 	}

@@ -90,21 +90,23 @@ public class OceanTest {
 
 	@Test
 	public void testShootAt() {
+		//check ship inside value as well?
 		assertEquals(ocean.getShotsFired(),0);
 		assertEquals(ocean.getHitCount(),0);
 		assertEquals(ocean.getShipsSunk(),0);
 
 		//submarine
 		ocean.shootAt(0, 5);
+		//System.out.println(ocean.getShipArray()[0][5].hit[0]);
 		//assertTrue(ocean.shootAt(0, 5));
 		assertEquals(ocean.getShotsFired(),1);
 		assertEquals(ocean.getHitCount(),1);
 		assertEquals(ocean.getShipsSunk(),1);
-
+/*
 		System.out.println("hit count"+ocean.getHitCount());
 		System.out.println("ship sunk"+ocean.getShipsSunk());
 		System.out.println("shots fired"+ocean.getShotsFired());
-
+*/
 		//destroyer
 
 		ocean.shootAt(4, 1);
@@ -123,6 +125,7 @@ public class OceanTest {
 
 		//cruiser
 		ocean.shootAt(4,7);
+		//ocean.print();
 		ocean.shootAt(5, 7);
 		assertEquals(ocean.getShotsFired(),9);
 		assertEquals(ocean.getHitCount(),9);
@@ -140,7 +143,6 @@ public class OceanTest {
 		assertEquals(ocean.getHitCount(),10);
 		assertEquals(ocean.getShipsSunk(),4);
 
-
 	}
 
 
@@ -152,7 +154,6 @@ public class OceanTest {
 		boolean horizontal;
 		int length;
 		Ship ship;
-		ocean.print();
 		for (int i = 0; i < ocean.getShipArray().length; i++) {
 			for (int j = 0; j < ocean.getShipArray()[i].length; j++) {
 				ship=ocean.getShipArray()[i][j];
@@ -175,7 +176,7 @@ public class OceanTest {
 				
 			}
 		}
-		ocean.print();
+		
 		assertTrue(ocean.isGameOver());
 	}
 }
