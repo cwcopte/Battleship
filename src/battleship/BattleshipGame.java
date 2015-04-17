@@ -41,7 +41,10 @@ final scores; and ask the user if he/she wants to play again.
 				if(game.ocean.isGameOver()){
 					//clean the ocean
 					game.ocean=new Ocean();
+					game.ocean.placeAllShipsRandomly();
+					game.ocean.print();
 				}
+				
 				//problem exist for row1??
 				//column 1-->refer to 0 and display
 				
@@ -71,8 +74,6 @@ final scores; and ask the user if he/she wants to play again.
 				if(game.ocean.isGameOver()){
 					System.out.println("Congradulations! You have finished the game and here is the result:");
 					System.out.println(game.getStatus());
-					//compute the score
-					game.getFinalScores();
 					//clean up and ask if play again!
 					System.out.println("Enter y to play again. Enter q to quit!");
 					String playAgain=in.next();
@@ -90,6 +91,11 @@ final scores; and ask the user if he/she wants to play again.
 					
 				}
 			}
+			else {
+				//explain rules
+				System.out.println("Please enter s to start game, r to check rules, q to exit.");
+				typing=in.next();
+			}
 		}
 	}
 
@@ -104,11 +110,5 @@ final scores; and ask the user if he/she wants to play again.
 
 		return result;
 	}
-	public int getFinalScores(){
-		//further construction
-		//return, hits, sunked, rate of shooting successfully
-		System.out.println("successfully get "+this.ocean.getHitCount()/this.ocean.getShotsFired());
-		//how to  caculate?
-		return 0;
-	}
+
 }
