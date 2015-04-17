@@ -337,38 +337,37 @@ public class ShipTest {
 	@Test
 	public void toStringTest() {
 		//System.out.println(Cruiser2.toString());
-		assertEquals(".", Cruiser2.toString());
+		assertEquals(" .", Cruiser2.toString());
 		Cruiser2.shootAt(9, 2);//ship length 3
 		Cruiser2.shootAt(9, 3);
-		assertEquals("s", Cruiser2.toString());
+		assertEquals(" s", Cruiser2.toString());
 		Cruiser2.shootAt(9, 4);
-		assertEquals("x", Cruiser2.toString());
+		assertEquals(" x", Cruiser2.toString());
 		
-		assertEquals(".", Battleship2.toString());
+		assertEquals(" .", Battleship2.toString());
 		Battleship2.shootAt(9, 5);//ship length 4
 		Battleship2.shootAt(9, 6);
 		Battleship2.shootAt(9, 7);
-		assertEquals("s", Battleship2.toString());
+		assertEquals(" s", Battleship2.toString());
 		Battleship2.shootAt(9, 8);
-		assertEquals("x", Battleship2.toString());
+		assertEquals(" x", Battleship2.toString());
 
 
-		assertEquals(".", Destroyer2.toString());
+		assertEquals(" .", Destroyer2.toString());
 		Destroyer2.shootAt(9, 0);//ship length 2
-		assertEquals("s", Destroyer2.toString());
+		assertEquals(" s", Destroyer2.toString());
 		Destroyer2.shootAt(9, 1);
-		assertEquals("x", Destroyer2.toString());
+		assertEquals(" x", Destroyer2.toString());
 		
-		assertEquals(".", Submarine2.toString());
+		assertEquals(" .", Submarine2.toString());
 		Submarine2.shootAt(9, 9);//ship length 1
-		assertEquals("x", Cruiser2.toString());
+		assertEquals(" x", Cruiser2.toString());
 
 		
 		//always return false, no mater where
-		assertEquals(".", EmptySea2.toString());
+		assertEquals(" .", EmptySea2.toString());
 		EmptySea2.shootAt(8, 9);//ship length 1
-		assertEquals(".", EmptySea2.toString());
+		assertEquals(" .", EmptySea2.toString());
 
 
 	}
-}
